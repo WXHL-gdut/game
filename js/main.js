@@ -22,10 +22,11 @@ export default class Main {
   restart() {
     databus.reset()
 
-    canvas.removeEventListener(
+    /*canvas.removeEventListener(
       'touchstart',
       this.touchHandler
-    )
+    )*/
+    //wx.stopAccelerometer()
 
     this.bg = new BackGround(ctx)
     this.player = new Player(ctx)
