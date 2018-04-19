@@ -69,7 +69,7 @@ export default class Main {
           that.music.playExplosion()
 
           bullet.visible = false
-          databus.score += 1
+          databus.score += 10
 
           break
         }

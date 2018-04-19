@@ -75,22 +75,34 @@ export default class Player extends Sprite {
    * 改变战机的位置
    */
   initEvent() {
-    canvas.addEventListener('touchstart', ((e) => {
-      e.preventDefault()
-
-      let x = e.touches[0].clientX
-      let y = e.touches[0].clientY
-
+    var that = this
+    wx.startAccelerometer()
+    wx.onAccelerometerChange(((e) => {
+      let x 
+      let y 
+      x = e.x * 400 + screenWidth / 2 + this.width / 2
+      y = -e.y * 400 + screenHeight - this.height - 30
+      console.log('x:' + that.x)
+      console.log('y:' + that.y)
+      this.setAirPosAcrossFingerPosZ(x, y)
       //
-      if ( this.checkIsFingerOnAir(x, y) ) {
+      /*if (this.checkIsFingerOnAir(x, y)) {
         this.touched = true
 
         this.setAirPosAcrossFingerPosZ(x, y)
-      }
+      }*/
+
+    }).bind(this))
+    
+    wx.onTouchStart(((e) => {
+      let x = e.touches[0].clientX
+      let y = e.touches[0].clientY
 
     }).bind(this))
 
-    canvas.addEventListener('touchmove', ((e) => {
+   
+
+    /*canvas.addEventListener('touchmove', ((e) => {
       e.preventDefault()
 
       let x = e.touches[0].clientX
@@ -99,9 +111,9 @@ export default class Player extends Sprite {
       if ( this.touched )
         this.setAirPosAcrossFingerPosZ(x, y)
 
-    }).bind(this))
+    }).bind(this))*/
 
-    canvas.addEventListener('touchend', ((e) => {
+   canvas.addEventListener('touchend', ((e) => {
       e.preventDefault()
 
       this.touched = false
